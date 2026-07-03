@@ -1,0 +1,171 @@
+@keyframes ticker-slide {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes ticker-pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--ticker-accent, #21cde4); }
+    50%       { opacity: 0.6; box-shadow: 0 0 0 5px transparent; }
+}
+
+@keyframes ticker-glow-in {
+    from { opacity: 0; transform: translateY(-100%); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.ticker-banner {
+    --ticker-accent: #21cde4;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 3.2rem;
+    background: linear-gradient(
+        90deg,
+        #080f1e 0%,
+        #0d1930 40%,
+        #0a1628 100%
+    );
+    border-bottom: 1px solid rgba(var(--ticker-accent, #21cde4), 0.2);
+    overflow: hidden;
+    animation: ticker-glow-in 0.4s ease both;
+    flex-shrink: 0;
+    z-index: 100;
+
+    // Top shimmer line
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--ticker-accent, #21cde4) 30%,
+            rgba(255, 255, 255, 0.6) 50%,
+            var(--ticker-accent, #21cde4) 70%,
+            transparent 100%
+        );
+        opacity: 0.6;
+    }
+
+    // Subtle bottom glow
+    &::after {
+        content: '';
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent 10%,
+            rgba(255, 255, 255, 0.06) 50%,
+            transparent 90%
+        );
+    }
+
+    &__badge {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex-shrink: 0;
+        padding: 0 1.2rem 0 1.4rem;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--ticker-accent, #21cde4);
+        text-shadow: 0 0 8px var(--ticker-accent, #21cde4);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                var(--ticker-accent, #21cde4),
+                transparent
+            );
+        }
+    }
+
+    &__pulse {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--ticker-accent, #21cde4);
+        box-shadow: 0 0 6px 1px var(--ticker-accent, #21cde4);
+        animation: ticker-pulse-dot 1.4s ease-in-out infinite;
+    }
+
+    &__viewport {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(0, 0, 0, 0.9) 3%,
+            black 10%,
+            black 90%,
+            rgba(0, 0, 0, 0.9) 97%,
+            transparent 100%
+        );
+    }
+
+    &__track {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        animation: ticker-slide 28s linear infinite;
+
+        &:hover {
+            animation-play-state: paused;
+        }
+    }
+
+    &__segment {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 0 2.4rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.88);
+        letter-spacing: 0.02em;
+    }
+
+    &__diamond {
+        font-size: 0.7rem;
+        opacity: 0.7;
+        filter: drop-shadow(0 0 3px currentColor);
+    }
+
+    &__dismiss {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-right: 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.04);
+        color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+    }
+}

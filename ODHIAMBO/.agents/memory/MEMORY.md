@@ -1,0 +1,3 @@
+- [Speed mode wiring](speed-mode.md) — fast/slow toggle is UI-only; Proposal.js reads `window.__empireSpeedMode` set in onRunButtonClick; forces duration=1,unit='t' for non-multiplier/accumulator contracts.
+- [Missing blocks pattern](missing-blocks.md) — add compatibility aliases/new blocks in `Binary/Tools/Misc/missing_blocks.js`; import after other Misc blocks; epoch alias must be self-contained (not defer to epoch.js which loads after Misc).
+- [Workflow dual-server](workflow-dual-server.md) — command must be `cd brian-the-trader && (node server.cjs &) && npm run dev`; plain `&` without parens causes npm run dev to miss the cd and fail with ENOENT.
